@@ -8,6 +8,7 @@
             let computerSelection = '';
             let playerSelection = '';
             let result = '';
+            let gameResult = '';
             let playerScore = 0;
             let computerScore = 0;
 
@@ -19,24 +20,19 @@
                 return cpuResult;            
             }
             
-            function win(){
-                playerPoints++
-                //return
-            }
-
             function playRound(playerSelection, computerSelection) {
                 playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
                 
                 if (playerSelection == computerSelection) {
-                    result = "Tie!"
+                    roundResult = "Tie!"
                 } else if ((playerSelection == 'Rock' & computerSelection == 'Paper') 
                         || (playerSelection == 'Paper' & computerSelection == 'Scissors')
                         || (playerSelection == 'Scissors' && computerSelection == 'Rock')){
-                    result = 'You lose! ' + computerSelection + ' beats ' + playerSelection;
+                    roundResult = 'You lose! ' + computerSelection + ' beats ' + playerSelection;
                 } else {
-                    result = "You win! " + playerSelection + ' beats ' + computerSelection;
+                    roundResult = "You win! " + playerSelection + ' beats ' + computerSelection;
                 }
-                return result;
+                return roundResult;
             }
 
             function game(){
@@ -44,13 +40,22 @@
                     let userInput = prompt('Rock, paper, or scissors?', 'Choose wisely')
                     let computerChoice = computerPlay();
                     playRound(userInput, computerChoice);
-                    if (result.includes('win')){
+                    if (roundResult.includes('win')){
                         playerScore++;
-                    } else if (result.includes('lose')) {
+                    } else if (roundResult.includes('lose')) {
                         computerScore++;
                     }
-                    console.log(result);
+                    console.log(roundResult);
                 }
+
+                if (playerScore > computerScore) {
+                    gameResult = 'You win the game!';
+                } else if (computerScore > playerScore) {
+                    gameResult = 'You lose the game!';
+                } else {
+                    gameResult = 'Tie!';
+                }
+                console.log(gameResult);
             }
             game();
         </script>
